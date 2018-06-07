@@ -21,9 +21,13 @@ UOpenDoor::UOpenDoor()
 void UOpenDoor::BeginPlay()
 {
 	Super::BeginPlay();
-	AActor *owner = this->GetOwner();
-	FString rot = owner->GetActorTransform().GetRotation().ToString();
-	UE_LOG(LogTemp, Log, TEXT("Door rotation level %s \n"), *rot);
+	AActor *owner = GetOwner();
+	//FString rot = owner->GetActorTransform().GetRotation().ToString();
+	FRotator *NewRotation = new FRotator(0.0f, owner->GetActorRotation().Yaw + 60.0F, 0.0f);
+		 
+	owner->SetActorRotation(*NewRotation);
+	delete NewRotation;
+	//UE_LOG(LogTemp, Log, TEXT("Door rotation level %s \n"), *rot);
 
 	// ...
 	
